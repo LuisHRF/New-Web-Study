@@ -93,11 +93,11 @@ def calculate_conversion_n_dropout(df):
     df_test = df_sorted[df_sorted['Variation']=='Test'].reset_index(drop=True)
 
     def calculate_rates(df):
-        # Calculate users by step
-        step_counts = df.groupby('process_step').size()
+        step_counts = df.groupby(['process_step']).size()
 
         #Calculate conversion
         conversion_rate = (step_counts.cumsum() / step_counts.sum()) * 100
+
 
         # Calculate dropout
         dropout_rate = 1 - (conversion_rate / 100)
