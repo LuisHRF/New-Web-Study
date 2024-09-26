@@ -45,75 +45,57 @@ def rename_demo_columns(df): #Rename the columns from df_final_demo
 
 # KPI/Metrics functions
 
-def calculate_avg_time_per_step(df): # Function to calculate the average time in seconds per step
-    # Sort values
-    df_sorted = df.sort_values(by=['visit_id', 'process_step', 'date_time'], ascending=[True, True, False])
-    df_sorted = df_sorted.drop_duplicates(subset=['visit_id', 'process_step'], keep='first').reset_index(drop=True)
+def kpi_summary(df):
 
-    # Divide by variation
-    df_control = df_sorted[df_sorted['Variation']=='Control'].reset_index(drop=True)
-    df_test = df_sorted[df_sorted['Variation']=='Test'].reset_index(drop=True)
+    kpi_summary = df.groupby('Variation').agg(
+    avg_logons_6_month=('logons_6_month', 'mean'),
+    avg_calls_6_month=('calls_6_month', 'mean'),
+    avg_balance=('balance', 'mean'),
+    total_clients=('client_id', 'nunique')
+    ).reset_index()
 
-    def step_times(df):
-        # Dictionary by step
-        steps = ['start', 'step_1', 'step_2', 'step_3', 'confirm']
-        step_df = {step: df[df['process_step'] == step][['visit_id', 'date_time']].rename(columns={'date_time': f'date_time_{step}'}) for step in steps}
+    return kpi_summary
 
-        # Merge dataframes by visit_id
-        df = step_df['start']
-        for step in steps[1:]:
-            df = pd.merge(df, step_df[step], on='visit_id', how='inner')
+def avg_time_per_step(df):
 
-        time_spent = {
-            'step 1': (df['date_time_step_1'] - df['date_time_start']).mean().total_seconds(),
-            'step 2': (df['date_time_step_2'] - df['date_time_step_1']).mean().total_seconds(),
-            'step 3': (df['date_time_step_3'] - df['date_time_step_2']).mean().total_seconds(),
-            'confirm': (df['date_time_confirm'] - df['date_time_step_3']).mean().total_seconds()
-        }
-
-        return time_spent
+    df['date_time'] = pd.to_datetime(df['date_time'])
     
-    time_per_step_control = step_times(df_control)
-    time_per_step_test = step_times(df_test)
-
-    # Create DF
-    time_spent_df = pd.DataFrame({
-        'Control': time_per_step_control,
-        'Test': time_per_step_test
-    })
-
-    return time_spent_df
-
-def calculate_conversion_n_dropout(df):
-    # Sort values
-    df_sorted = df.sort_values(by=['visit_id', 'process_step', 'date_time'], ascending=[True, True, False])
-
-    # Divide by variation
-    df_control = df_sorted[df_sorted['Variation']=='Control'].reset_index(drop=True)
-    df_test = df_sorted[df_sorted['Variation']=='Test'].reset_index(drop=True)
-
-    def calculate_rates(df):
-        step_counts = df.groupby(['process_step']).size()
-
-        #Calculate conversion
-        conversion_rate = (step_counts.cumsum() / step_counts.sum()) * 100
-
-
-        # Calculate dropout
-        dropout_rate = 1 - (conversion_rate / 100)
-
-        return conversion_rate, dropout_rate
+    df_sorted = df.sort_values(by=['visit_id', 'date_time'])
     
-    # Calculate each variation
-    conversion_rate_control, dropout_rate_control = calculate_rates(df_control)
-    conversion_rate_test, dropout_rate_test = calculate_rates(df_test)
+    df_sorted['time_spent'] = df_sorted.groupby(['visit_id'])['date_time'].diff()
 
-    conversion_dropout_df = pd.DataFrame({
-        'control_conversion_rate': conversion_rate_control,
-        'control_dropout_rate': dropout_rate_control,
-        'test_conversion_rate': conversion_rate_test,
-        'test_dropout_rate': dropout_rate_test
-    })
+    process_step_summary = df_sorted.groupby(['Variation', 'process_step']).agg(
+        avg_time_spent=('time_spent', lambda x: x.mean().total_seconds() if pd.notnull(x.mean()) else 0)
+    ).reset_index()
 
-    return conversion_dropout_df
+    pivot_table = process_step_summary.pivot(index='process_step', columns='Variation', values='avg_time_spent')
+
+    return pivot_table
+
+
+def conversion_rate(df):
+
+    # Calcular el número de usuarios que completan cada step agrupado por Variation (Test o Control)
+    users_completed_by_variation = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
+
+    total_users_by_variation = df.groupby('Variation')['client_id'].nunique().reset_index(name='total_users')
+
+    conversion_rate_by_step = pd.merge(users_completed_by_variation, total_users_by_variation, on='Variation')
+
+    conversion_rate_by_step['conversion_rate'] = (conversion_rate_by_step['users_completed'] / conversion_rate_by_step['total_users']) * 100
+
+    pivot_table = conversion_rate_by_step.pivot(index='process_step', columns='Variation', values='conversion_rate')
+
+    return pivot_table
+    
+def average_balance_by_age_group(df):
+    bins = [18, 30, 40, 50, 60, 70, 100]
+    labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
+    df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
+
+    balance_by_age_group = df.groupby(['age_group', 'Variation'])['balance'].mean().reset_index()
+
+    pivot_table = balance_by_age_group.pivot(index='age_group', columns='Variation', values='balance')
+
+    return pivot_table
 
