@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn
+from collections import Counter
 
 
 def data_summary(df): # Function for before all and check the raw dataframes
@@ -99,3 +100,63 @@ def average_balance_by_age_group(df):
 
     return pivot_table
 
+
+def create_click_path(df):
+    age_bins = [18, 30, 40, 50, 60, 70, 100]
+    age_labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
+    df['age_group'] = pd.cut(df['age'], bins=age_bins, labels=age_labels, right=False)
+
+    step_order = {'start': 1, 'step_1': 2, 'step_2': 3, 'step_3': 4, 'confirm': 5}
+    df['step_order'] = df['process_step'].map(step_order)
+
+    # Create df
+    path_data = []
+
+    # Init a loop each age group and variation
+    for age_group in age_labels:
+        for variation in ['Control', 'Test']:
+            filtered_df = df[(df['age_group'] == age_group) & (df['Variation'] == variation)]
+            
+            click_sequences = filtered_df.sort_values(by=['visit_id', 'step_order']).groupby('visit_id')['process_step'].apply(lambda x: ' -> '.join(x)).tolist()
+            
+            path_counts = Counter(click_sequences)
+            
+            for path, count in path_counts.items():
+                path_data.append({
+                    'age_group': age_group,
+                    'variation': variation,
+                    'click_path': path,
+                    'count': count
+                })
+    
+    return pd.DataFrame(path_data)
+ 
+
+def chart_bar_cp_per_age_group(df):
+    step_columns = ['start_percentage', 'step_1_percentage', 'step_2_percentage', 'step_3_percentage', 'confirm_percentage']
+    step_display_labels = ['Start', 'Step 1', 'Step 2', 'Step 3', 'Confirm']
+
+    age_groups = df['age_group'].unique()
+
+    for age_group in age_groups:
+        subset = df[df['age_group'] == age_group]
+        
+        plt.figure(figsize=(10, 6))
+        
+        control_data = subset[subset['variation'] == 'Control'][step_columns].iloc[0] if not subset[subset['variation'] == 'Control'].empty else [0] * len(step_columns)
+        test_data = subset[subset['variation'] == 'Test'][step_columns].iloc[0] if not subset[subset['variation'] == 'Test'].empty else [0] * len(step_columns)
+
+        bar_width = 0.35
+        index = range(len(step_display_labels))
+
+        plt.bar(index, control_data, width=bar_width, label='Control', color='lightblue', alpha=0.7)
+        plt.bar(index, test_data, width=bar_width, label='Test', color='lightgreen', alpha=0.7, bottom=control_data)
+
+        plt.xlabel('Process Steps')
+        plt.ylabel('Percentage of Users Reaching Each Step (%)')
+        plt.title(f'Percentage of Users Reaching Each Step - Age Group: {age_group}')
+        plt.xticks(index, step_display_labels)
+        plt.legend(title='Variation')
+        plt.grid(axis='y')
+
+        plt.show()
