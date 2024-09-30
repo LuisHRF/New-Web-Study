@@ -1,4 +1,4 @@
-# **Analysis of Digital Experiments at Vanguard**
+# **Testing A/B: Data analysis of the launch of a new Vanguard website**
 
 This is a data analysis project within the Ironhack Data Analysis Bootcamp.
 
