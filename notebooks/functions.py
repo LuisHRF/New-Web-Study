@@ -76,7 +76,6 @@ def avg_time_per_step(df):
 
 def conversion_rate(df):
 
-    # Calcular el número de usuarios que completan cada step agrupado por Variation (Test o Control)
     users_completed_by_variation = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
 
     total_users_by_variation = df.groupby('Variation')['client_id'].nunique().reset_index(name='total_users')
