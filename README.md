@@ -1,22 +1,33 @@
-# **Testing A/B: Data analysis of the launch of a new Vanguard website**
+# 🚀 **Analysis of Digital Experiments at Vanguard** 
 
 This is a data analysis project within the Ironhack Data Analysis Bootcamp.
 
 [Link to the presentation]( )
 
 
-## Team Members
+## 💻 Team Members 
 
 | Nombre             | LinkedIn                                  |
 |----------------------------------|-------------------------------------------|
 | Luis H. Rodríguez Fuentes	 |   [LinkedIn](https://www.linkedin.com/in/luis-h-rodr%C3%ADguez-fuentes/)    |
 | Haridian Lugo Morays        |   [LinkedIn](https://www.linkedin.com/in/haridian-morays-242023329/)   |
 
-## Project Description
+
+## 📋 Table of Contents 
+- Project Overview
+- Data Sources 
+- Project Structure
+- Methodology
+- Major obstacle
+- Conclusions
+- Tools and Technologies Used
+
+
+## ✨ Project Overview
 
 This project aims to analyze customer experience trends during a digital experiment at Vanguard, focusing on the impact of a new interface on user interactions. The goal is to derive insights that can enhance customer engagement strategies. Below is a description of the methods used for data collection, analysis, and visualization.
 
-## Data Sources
+## 📑 Data Sources 
 
 - [Client Profiles](https://github.com/data-bootcamp-v4/lessons/blob/main/5_6_eda_inf_stats_tableau/project/files_for_project/df_final_demo.txt)
 
@@ -26,8 +37,34 @@ This project aims to analyze customer experience trends during a digital experim
 
 - [Experiment Roster](https://github.com/data-bootcamp-v4/lessons/blob/main/5_6_eda_inf_stats_tableau/project/files_for_project/df_final_experiment_clients.txt)
 
+## 📁 Project Structure
+New-Web-Study/                                     
+├── charts_png/                                                                    
+│   ├── age_group_distribution_for_variation.png                                                    
+│   ├── avg_time_per_step.png                                                                                
+│   ├── calls_n_logons.png                                 
+│   ├── conversion_n_dropout_rate.png                                        
+│   └── performance_by_age_group.png                                      
+├── data/                                                    
+│   ├── raw/                                              
+│   │   ├── df_final_clients_data.csv                                        
+│   │   ├── df_final_demo_cleanead.csv                                         
+│   │   └── df_web_total_data.csv                                          
+│   ├── df_final_clients_data.csv                                                   
+│   ├── df_final_demo_cleanead.csv                                                  
+│   └── df_web_data_total.csv                                                 
+├── notebooks/                                                  
+│   ├── draft/                                             
+│   │   ├── Vanguard_check_nan.ipynb                                                        
+│   │   ├── main_draft.ipynb                                                 
+│   ├── Vanguard_ml_lighgbm.ipynb                                              
+│   ├── functions.py                                                           
+│   └── main.ipynb                                               
+├── config.yaml                                                  
+├── requirements.txt                                                      
+└── README.md                                         
 
-## Methodology
+## 📚 Methodology
 
 ### 1. Data Collection
 
@@ -39,7 +76,7 @@ We addressed data quality issues stemming from inconsistencies in the original d
 
 ### 3. Data Analysis
 
-Using libraries such as Pandas, NumPy, and Seaborn, we developed a series of functions and scripts to analyze user interactions. Key analyses include:
+Using libraries such as Pandas, NumPy, and Seaborn, we developed a series of functions and scripts to analyze user interactions. Here are some examples of functions created:
 
 - **Average Time Spent**: We calculated the average time users spend at each step of the process, segmented by age group and variation.
 
@@ -68,7 +105,13 @@ We used Matplotlib and Seaborn for graphical visualizations, presenting insights
 
 Data visualization plays a key role in deriving clear insights from the experiment and understanding customer interactions. Throughout the analysis, several key charts were created to provide a detailed view of the performance of both control and test groups.
 
-Below are the main visualizations included in the analysis:
+
+## 🔍 Major obstacle
+
+
+## 📊 Conclusions
+
+The analysis provides a comprehensive view of how the new digital interface affects customer interactions. Findings highlight areas for improvement and offer insights into the demographics most affected by the changes.
 
 - **Age group distribution for control and test groups**: This analysis examines the proportion of customers within different age groups for both control and test variations, providing insights into demographic distribution.
   ![age_group_distribution_for_variation](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/age_group_distribution_for_variation.png?raw=true)
@@ -87,17 +130,10 @@ Below are the main visualizations included in the analysis:
   - A bar plot representing the **completion rates** for each age group in the control and test groups, highlighting differences in behavior and interaction between age demographics.
 ![performance_by_age_group](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/performance_by_age_group.png?raw=true)
 
-
-## Major obstacle
-
-
-## Conclusions
-
-The analysis provides a comprehensive view of how the new digital interface affects customer interactions. Findings highlight areas for improvement and offer insights into the demographics most affected by the changes.
-
-## Tools and Technologies Used
+## 🛠️ Tools and Technologies Used
 
 - **Programming Language**: Python
 - **Libraries**: Pandas, NumPy
 - **Visualization**: Matplotlib, Seaborn
 - **Jupyter Notebook**: For documentation and interactive analysis.
+
