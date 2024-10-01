@@ -46,7 +46,7 @@ def rename_demo_columns(df): #Rename the columns from df_final_demo
 
 # KPI/Metrics functions
 
-def kpi_summary(df):
+def kpi_summary(df): # Calculate key performance indicators (KPI) for each variation (Control or Test)
 
     kpi_summary = df.groupby('Variation').agg(
     avg_logons_6_month=('logons_6_month', 'mean'),
@@ -57,7 +57,7 @@ def kpi_summary(df):
 
     return kpi_summary
 
-def avg_time_per_step(df):
+def avg_time_per_step(df): # Calculate te aberage time spend in each step
 
     df['date_time'] = pd.to_datetime(df['date_time'])
     
@@ -74,7 +74,7 @@ def avg_time_per_step(df):
     return pivot_table
 
 
-def conversion_rate(df):
+def conversion_rate(df): # Calculate the conversion rate for each step 
 
     users_completed_by_variation = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
 
@@ -88,7 +88,7 @@ def conversion_rate(df):
 
     return pivot_table
     
-def average_balance_by_age_group(df):
+def average_balance_by_age_group(df): # Calculate the average balance for each age group
     bins = [18, 30, 40, 50, 60, 70, 100]
     labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
     df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
@@ -99,8 +99,47 @@ def average_balance_by_age_group(df):
 
     return pivot_table
 
+def analyze_error_rate(df):
 
-def create_click_path(df):
+    users_completed_by_step = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
+    
+    users_completed_by_step['prev_step_users'] = users_completed_by_step.groupby('Variation')['users_completed'].shift(1)
+    
+    users_completed_by_step['error_rate'] = ((users_completed_by_step['prev_step_users'] - users_completed_by_step['users_completed']) / users_completed_by_step['prev_step_users']) * 100
+    
+    print("\n=== Error Rate Analysis ===")
+    for index, row in users_completed_by_step.iterrows():
+        if row['error_rate'] > 10:  # Se considera significativa si es superior a 10%
+            print(f"High user loss at '{row['process_step']}' for {row['Variation']} (Error Rate: {row['error_rate']:.2f}%)")
+    
+    plt.figure(figsize=(12, 6))
+    
+    bar_width = 0.35
+    index = range(len(users_completed_by_step['process_step'].unique()))
+    
+    steps = users_completed_by_step['process_step'].unique()
+    control_data = users_completed_by_step[users_completed_by_step['Variation'] == 'Control']['error_rate']
+    test_data = users_completed_by_step[users_completed_by_step['Variation'] == 'Test']['error_rate']
+    
+    plt.bar(index, control_data, width=bar_width, color='red', alpha=0.6, label='Control')
+    plt.bar([i + bar_width for i in index], test_data, width=bar_width, color='blue', alpha=0.6, label='Test')
+    
+    plt.xlabel('Process Steps')
+    plt.ylabel('Error Rate (%)')
+    plt.title('Error Rate per Process Step by Variation')
+    plt.axhline(10, color='gray', linestyle='--', linewidth=0.7, label='Significant Loss Threshold (10%)')
+    plt.xticks([r + bar_width / 2 for r in index], steps)
+    plt.legend()
+    plt.grid(axis='y')
+    
+    plt.show()
+    
+    return users_completed_by_step
+
+
+# Discarded functions
+
+def create_click_path(df): 
     age_bins = [18, 30, 40, 50, 60, 70, 100]
     age_labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
     df['age_group'] = pd.cut(df['age'], bins=age_bins, labels=age_labels, right=False)
