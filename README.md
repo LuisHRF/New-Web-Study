@@ -141,6 +141,6 @@ The analysis provides a comprehensive view of how the new digital interface affe
 
 - **Programming Language**: Python
 - **Libraries**: Pandas, NumPy
-- **Visualization**: Matplotlib, Seaborn
+- **Visualization**: Matplotlib, Seaborn, Power BI
 - **Jupyter Notebook**: For documentation and interactive analysis.
 
