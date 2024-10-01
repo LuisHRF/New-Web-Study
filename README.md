@@ -47,10 +47,10 @@ New-Web-Study/
 │   └── performance_by_age_group.png                                      
 ├── data/                                                                                        
 |   ├── power_bi_tables/                                        
-|   |   ├── age_distribution.csv                                                        
-|   |   ├── avg_time_per_step.csv                                                        
-|   |   ├── completion_rate_by_age_group.csv                                                                     
-|   |   ├── error_rate.csv                                                                                                        
+|   |   ├── age_distribution.csv                                                                     
+|   |   ├── avg_time_per_step.csv                                                                                             
+|   |   ├── completion_rate_by_age_group.csv                                                                                    
+|   |   ├── error_rate.csv                                                                                                                                              
 │   ├── raw/                                                                                                                       
 │   │   ├── df_final_clients_data.csv                                                                                                
 │   │   ├── df_final_demo_cleanead.csv                                                                                                   
