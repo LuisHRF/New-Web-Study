@@ -45,7 +45,12 @@ New-Web-Study/
 │   ├── calls_n_logons.png                                 
 │   ├── conversion_n_dropout_rate.png                                        
 │   └── performance_by_age_group.png                                      
-├── data/                                                    
+├── data/ 
+|   ├── power_bi_tables/          
+|   |   ├── age_distribution.csv                         
+|   |   ├── avg_time_per_step.csv                  
+|   |   ├── completion_rate_by_age_group.csv                         
+|   |   ├── error_rate.csv                                                       
 │   ├── raw/                                              
 │   │   ├── df_final_clients_data.csv                                        
 │   │   ├── df_final_demo_cleanead.csv                                         
@@ -58,9 +63,11 @@ New-Web-Study/
 │   │   ├── Vanguard_check_nan.ipynb                                                        
 │   │   ├── main_draft.ipynb                                                 
 │   ├── Vanguard_ml_lighgbm.ipynb                                              
-│   ├── functions.py                                                           
-│   └── main.ipynb                                               
-├── config.yaml                                                  
+│   ├── functions.py
+|   ├── main.ipynb                                
+│   └── powerbi_functions.py                                         
+├── config.yaml   
+├── power_bi_dashboard_testing_ab.pbix
 ├── requirements.txt                                                      
 └── README.md                                         
 
