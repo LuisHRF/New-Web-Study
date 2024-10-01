@@ -102,15 +102,18 @@ def average_balance_by_age_group(df): # Calculate the average balance for each a
 def analyze_error_rate(df):
 
     users_completed_by_step = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
-    
+    process_order = ['start', 'step_1', 'step_2', 'step_3', 'confirm']
+    users_completed_by_step['process_step'] = pd.Categorical(users_completed_by_step['process_step'], categories=process_order, ordered=True)
+    users_completed_by_step = users_completed_by_step.sort_values(['Variation', 'process_step'])
     users_completed_by_step['prev_step_users'] = users_completed_by_step.groupby('Variation')['users_completed'].shift(1)
-    
     users_completed_by_step['error_rate'] = ((users_completed_by_step['prev_step_users'] - users_completed_by_step['users_completed']) / users_completed_by_step['prev_step_users']) * 100
-    
+    users_completed_by_step['error_rate'] = users_completed_by_step['error_rate'].fillna(0)
+
     print("\n=== Error Rate Analysis ===")
     for index, row in users_completed_by_step.iterrows():
-        if row['error_rate'] > 10:  # Se considera significativa si es superior a 10%
+        if row['error_rate'] > 10:
             print(f"High user loss at '{row['process_step']}' for {row['Variation']} (Error Rate: {row['error_rate']:.2f}%)")
+    
     
     plt.figure(figsize=(12, 6))
     
