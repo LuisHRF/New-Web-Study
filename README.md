@@ -1,5 +1,7 @@
 # 🚀 **Analysis of Digital Experiments at Vanguard** 
 
+![](https://github.com/LuisHRF/New-Web-Study/blob/main/dashboard_gif/power_bi_dashboard.gif)
+
 This is a data analysis project within the Ironhack Data Analysis Bootcamp.
 
 [Link to the presentation]( )
