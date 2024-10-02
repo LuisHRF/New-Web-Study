@@ -1,0 +1,3 @@
+Variation,total_errors,total_users,global_error_rate
+Control,83640.0,700974.0,11.931968946066473
+Test,49632.0,756696.0,6.559040882996606

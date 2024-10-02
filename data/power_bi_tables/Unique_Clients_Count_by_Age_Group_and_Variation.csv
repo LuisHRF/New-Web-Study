@@ -1,0 +1,13 @@
+age_group,Variation,unique_clients_count
+18-30,Control,6901
+18-30,Test,7045
+30-40,Control,6505
+30-40,Test,7688
+40-50,Control,6408
+40-50,Test,6979
+50-60,Control,7799
+50-60,Test,8889
+60-70,Control,5795
+60-70,Test,6728
+70+,Control,2105
+70+,Test,2334

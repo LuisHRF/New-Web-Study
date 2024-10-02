@@ -1,0 +1,11 @@
+Variation,process_step,avg_time_spent
+Control,confirm,128.626792
+Control,start,172.450639
+Control,step_1,42.554818
+Control,step_2,39.916188
+Control,step_3,96.076445
+Test,confirm,130.057396
+Test,start,157.901331
+Test,step_1,38.717192
+Test,step_2,47.37318
+Test,step_3,96.54477

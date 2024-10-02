@@ -1,0 +1,39 @@
+# Project settings
+project:
+  name: Testing A/B | Analyzing data from the new website
+
+# Paths configuration
+paths:
+  functions: notebook/functions.py
+  visualization_data: charts_png/...
+  ml_model: notebooks/Vanguard_ml_lighgbm.ipynb
+  main_notebook: notebook/main.ipynb
+  raw_data_1: "data/raw/df_final_demo.txt"
+  raw_data_2: "data/raw/df_final_experiment_clients.txt"
+  raw_data_3: "data/raw/df_final_web_data_pt1.txt"
+  raw_data_4: "data/raw/df_final_web_data_pt2.txt"
+  cleaned_data_1: "data/df_final_demo_cleaned.csv"
+  cleaned_data_1: "data/df_final_web_data_total.csv"
+  processed_data: "data/df_final_clients_data.csv"
+
+
+# Experiment settings
+experiment:
+  start_date: "2017-03-15"
+  end_date: "2017-06-20"
+  control_group: "web_old"
+  test_group: "web_new"
+
+# Model settings
+model:
+  type: "lightgbm"
+  hyperparameters:
+    learning_rate: 0.1
+    n_estimators: 200
+    num_leaves: 100
+    feature_fraction: 1.0
+
+# Training settings
+training:
+  test_size: 0.2
+  random_state: 42
