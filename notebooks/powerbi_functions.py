@@ -3,14 +3,14 @@ import numpy as np
 
 
 def age_distribution(df):
-    bins = [18, 30, 40, 50, 60, 70, 100]
-    labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
-    df['age_group'] = pd.cut(df['age'], bins=bins, labels=labels, right=False)
+    age_bins = [18, 30, 40, 50, 60, 70, 100]
+    age_labels = ['18-30', '30-40', '40-50', '50-60', '60-70', '70+']
+    df['age_group'] = pd.cut(df['age'], bins=age_bins, labels=age_labels, right=False)
     
-    age_dist = df['age_group'].value_counts().reset_index()
-    age_dist.columns = ['age_group', 'clients_count']
+    unique_clients_count = df.groupby(['age_group', 'Variation'])['client_id'].nunique().reset_index()
+    unique_clients_count.rename(columns={'client_id': 'unique_clients_count'}, inplace=True)
     
-    return age_dist
+    return unique_clients_count
 
 def avg_time_per_step_table(df):
     df['date_time'] = pd.to_datetime(df['date_time'])
@@ -37,7 +37,7 @@ def completion_rate_by_age_group(df):
     return completion_rate
 
 
-def error_rate_table(df):
+def error_rate(df):
     users_completed_by_step = df.groupby(['process_step', 'Variation'])['client_id'].nunique().reset_index(name='users_completed')
 
     process_order = ['start', 'step_1', 'step_2', 'step_3', 'confirm']
@@ -52,4 +52,8 @@ def error_rate_table(df):
 
     return users_completed_by_step
 
+def calls_logons(df):
+    clients_table = df[['client_id', 'calls_6_month', 'logons_6_month', 'Variation']].drop_duplicates(subset=['client_id'])
+
+    return clients_table
 
