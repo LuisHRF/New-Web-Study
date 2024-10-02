@@ -63,7 +63,7 @@ New-Web-Study/
 │   │   ├── Vanguard_check_nan.ipynb                                                        
 │   │   ├── main_draft.ipynb                                                 
 │   ├── Vanguard_ml_lighgbm.ipynb                                              
-│   ├── functions.py
+│   ├── functions.py                                                                                
 │   ├── main.ipynb                                                             
 │   └── powerbi_functions.py                                         
 ├── config.yaml   
