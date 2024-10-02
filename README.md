@@ -64,7 +64,7 @@ New-Web-Study/
 │   │   ├── main_draft.ipynb                                                 
 │   ├── Vanguard_ml_lighgbm.ipynb                                              
 │   ├── functions.py
-│   ├── main.ipynb                                
+│   ├── main.ipynb                                                             
 │   └── powerbi_functions.py                                         
 ├── config.yaml   
 ├── power_bi_dashboard_testing_ab.pbix                                                                                                                     
