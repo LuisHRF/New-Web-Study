@@ -67,7 +67,7 @@ New-Web-Study/
 │   ├── main.ipynb                                
 │   └── powerbi_functions.py                                         
 ├── config.yaml   
-├── power_bi_dashboard_testing_ab.pbix                                                                  
+├── power_bi_dashboard_testing_ab.pbix                                                                                                                     
 ├── requirements.txt                                                      
 └── README.md     
 
