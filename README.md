@@ -44,8 +44,8 @@ New-Web-Study/
 │   ├── avg_time_per_step.png                                                                                
 │   ├── calls_n_logons.png                                 
 │   ├── conversion_n_dropout_rate.png                                        
-│   └── performance_by_age_group.png
-├── data/                                                                                        
+│   └── performance_by_age_group.png                                                                            
+├── data/                                                                                                                    
 │   ├── power_bi_tables/                                        
 │   │   ├── age_distribution.csv                                                                     
 │   │   ├── avg_time_per_step.csv                                                                                             
