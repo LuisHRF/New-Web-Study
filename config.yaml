@@ -5,7 +5,6 @@ project:
 # Paths configuration
 paths:
   functions: notebook/functions.py
-  visualization_data: charts_png/...
   ml_model: notebooks/Vanguard_ml_lighgbm.ipynb
   main_notebook: notebook/main.ipynb
   raw_data_1: "data/raw/df_final_demo.txt"
@@ -15,6 +14,12 @@ paths:
   cleaned_data_1: "data/df_final_demo_cleaned.csv"
   cleaned_data_1: "data/df_final_web_data_total.csv"
   processed_data: "data/df_final_clients_data.csv"
+
+# Visualization settings
+visualization:
+  output_dir: "charts_png/"
+  format: "png"
+  dashboard: "power_bi_dashboard_testing_ab.pbix"
 
 
 # Experiment settings
