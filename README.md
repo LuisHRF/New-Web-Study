@@ -5,10 +5,10 @@
 
 ## 💻 Team Members 
 
-| Nombre             | LinkedIn                                  |
-|----------------------------------|-------------------------------------------|
-| Luis H. Rodríguez Fuentes	 |   [LinkedIn](https://www.linkedin.com/in/luis-h-rodr%C3%ADguez-fuentes/)    |
-| Haridian Lugo Morays        |   [LinkedIn](https://www.linkedin.com/in/haridian-morays-242023329/)   |
+| Name             | LinkedIn Profile | Brief Description |
+|----------------------------------|-------------------------------------------|-------------------------------------------|
+| Luis H. Rodríguez Fuentes	 |   [LinkedIn](https://www.linkedin.com/in/luis-h-rodr%C3%ADguez-fuentes/)    | Data Analyst |
+| Haridian Lugo Morays        |   [LinkedIn](https://www.linkedin.com/in/haridian-morays-242023329/)   | FullStack |
 
 
 ## 📋 Table of Contents 
@@ -235,23 +235,60 @@ Secondly, we had a big problem when it came to coordinating the work. Since it w
 ## 📊 Conclusions (in terms of objectives)
 
 The analysis provides a comprehensive view of how the new digital interface affects customer interactions. The results highlight areas for improvement and strengths that we will now highlight.
-
-- **Age group distribution for control and test groups**: This analysis examines the proportion of customers within different age groups for both control and test variations, providing insights into demographic distribution.
-  ![age_group_distribution_for_variation](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/age_group_distribution_for_variation.png?raw=true)
   
-- **Average time per step for control and test**: This plot illustrates the average time users spent on each process step, comparing the control group to the test group, offering insights into the user journey's efficiency.
+**Times for each step need to be improved:** although it is true that in the first steps (```start``` and ```step_1```) the time between those who enjoy the new website and those who are on the old one is shorter; in the rest of the steps it either grows or remains very close.
+
+In the case of ```start``` the difference is wide: it goes from 172 seconds to 158, almost 20 less, while in ```step_1``` it remains at a difference of 5 seconds. However, both in ```confirm``` and in ```step_2```, there is an increase of 2 and 8 seconds respectively (in the case of ```step_3``` they remain the same).
+
+Therefore we believe that, although we can speak of a general improvement, development should focus more on this point.
 ![avg_time_per_step](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/avg_time_per_step.png?raw=true)
 
-- **Comparison of calls and logons by variation**: This compares the number of calls and logins by users in the control group versus the test group, providing insights into engagement levels.
-![calls_n_logons](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/calls_n_logons.png?raw=true)
+**There is a big drop in errors:** This is a big step forward. Even though in both ```step_2``` and ```step_3``` the drop in the Test group increases slightly, the overall balance is very positive: the error rate goes from 11.93% in Control to 6.56% in Test. That is, an improvement of 5%.
+![error_rate](https://github.com/LuisHRF/New-Web-Study/blob/main/charts_png/error_rate_per_step.png)
 
-- **Conversion rate and dropout rate per step for control and test**: This visualization focuses on the conversion rates and dropout rates at each step of the process for both groups, highlighting where users tend to drop off.
+**The Test group has the highest conversion rate in the final phase:** In line with the above, the number of customers who complete the process is around 56.17% in the Test group compared to 43.83% in the Control group. That is, an improvement of almost 14%.
+
+At the same time, it can be observed that the conversion rate in Test is much higher in the ```confirm``` case, while the abandonment rate is higher in the Control group.
 ![conversion_n_dropout_rate](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/conversion_n_dropout_rate.png?raw=true)
 
-- **Average time and completion rate by age group (control vs test)**: A combined analysis that includes:
-  - A line plot showing the **average time spent per step** by different age groups in both control and test groups.
-  - A bar plot representing the **completion rates** for each age group in the control and test groups, highlighting differences in behavior and interaction between age demographics.
+**There is a size bias due to Variation**: During the analysis, we placed significant emphasis on age groups to observe their behavior and engagement with both the new and the traditional web interfaces. When counting the number of users in each group, it can be seen that there is a noticeable difference between the Test group (39K users) and the Control group (35K users). This imbalance in sample sizes can lead to biased insights, as certain age groups may be overrepresented in one group compared to the other, potentially skewing the observed effects.
+![age_group_distribution_for_variation](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/age_group_distribution_for_variation.png?raw=true)
+
+**Completion rate plummets at older ages (Right Graph)**: the Test variation consistently outperforms the Control variation across all age groups, with a particularly strong effect in the 18-30 and 30-40 age brackets (over 70% completion rate ). However, this disparity in completion rates between younger and older users indicates that further adjustments to the new interface may be needed to cater to senior users.
+
+**More experienced users take longer to take the next step (Left Graph)**: Older age groups (60-70 and 70+) tend to spend significantly more time at each process step compared to younger groups. This trend is consistent across both the Test and Control variations.
 ![performance_by_age_group](https://github.com/LuisHRF/New-Web-Study/blob/luis_branch/charts_png/performance_by_age_group.png?raw=true)
+
+So, to recap:
+
+1. There is an improvement in times and error rates and conversion between the new website and the old one, but it is not as severe as one might expect
+
+2. There is a problem with oversizing the tests, the samples should be equalized
+
+3. Older age groups perform considerably worse than younger ones
+
+## How to Use
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/LuisHRF/New-Web-Study.git
+```
+
+### 2. Install required packages
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Run Jupyter notebooks
+```bash
+# Navigate to the notebooks/ folder to see the analysis and visualization outputs
+```
+
+## Links of interest
+
+- [Canva presentation](https://www.canva.com/design/DAGSbqxrSFY/5CUN4NvdVd_wcZlVeRT24Q/edit)
+- [Repository] (https://github.com/LuisHRF/New-Web-Study)
+- Power Bi Dashboard: ../power_bi_dashboard_testing_ab.pbix
 
 ## 🛠️ Tools and Technologies Used
 
