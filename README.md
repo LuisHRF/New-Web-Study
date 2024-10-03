@@ -287,7 +287,7 @@ pip install -r requirements.txt
 ## Links of interest
 
 - [Canva presentation](https://www.canva.com/design/DAGSbqxrSFY/5CUN4NvdVd_wcZlVeRT24Q/edit)
-- [Repository] (https://github.com/LuisHRF/New-Web-Study)
+- [Repository](https://github.com/LuisHRF/New-Web-Study)
 - Power Bi Dashboard: ../power_bi_dashboard_testing_ab.pbix
 
 ## 🛠️ Tools and Technologies Used
