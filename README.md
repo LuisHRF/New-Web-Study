@@ -40,11 +40,11 @@ This project aims to analyze customer experience trends during a digital experim
 ## 📁 Project Structure
 New-Web-Study/                                     
 ├── charts_png/                                                                    
-│   ├── age_group_distribution_for_variation.png                                                    
-│   ├── avg_time_per_step.png                                                                                
-│   ├── calls_n_logons.png                                 
-│   ├── conversion_n_dropout_rate.png                                        
-│   └── performance_by_age_group.png                                      
+│     ├── age_group_distribution_for_variation.png                                                    
+│     ├── avg_time_per_step.png                                                                                
+│     ├── calls_n_logons.png                                 
+│     ├── conversion_n_dropout_rate.png                                        
+│     └── performance_by_age_group.png                                      
 ├── data/                                                                                        
 │   ├── power_bi_tables/                                        
 │   │   ├── age_distribution.csv                                                                     
